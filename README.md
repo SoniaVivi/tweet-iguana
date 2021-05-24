@@ -1,6 +1,6 @@
-# Tweet Downloader
+# Tweet iguana
 
-Tweet Downloader is a browser extension that adds a button to tweets to download all linked attachments.
+Tweet iguana is a browser extension that adds a button to tweets to download all linked attachments.
 
 **Supported Browsers**
 
