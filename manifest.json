@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Tweet Downloader",
+  "version": "1.0",
+
+  "description": "Adds a button to download attachments from tweets",
+
+  "icons": {
+    "48": "icons/icon-48.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.twitter.com/*"],
+      "js": ["source.js"]
+    }
+  ]
+}
