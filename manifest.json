@@ -9,10 +9,23 @@
     "48": "icons/icon-48.png"
   },
 
+  "background": {
+    "scripts": ["/src/downloadsController.js"]
+  },
+
   "content_scripts": [
     {
-      "matches": ["*://*.twitter.com/*"],
-      "js": ["source.js"]
+      "matches": ["*://*.twitter.com/*", "*://pbs.twimg.com/*"],
+      "js": ["/dist/main.js"]
     }
+  ],
+
+  "permissions": [
+    "webNavigation",
+    "*://*.twitter.com/*",
+    "*://pbs.twimg.com/*",
+    "downloads",
+    "background",
+    "notifications"
   ]
 }

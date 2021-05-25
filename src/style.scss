@@ -1,0 +1,24 @@
+$blue: #1da1f2;
+$hover-blue: #dae9f2;
+
+.download-button {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 95px;
+  height: 32px;
+
+  outline: unset;
+  border: 1px solid $blue;
+  border-radius: 28px;
+
+  font-weight: 600;
+  font-size: 12px;
+
+  background-color: unset;
+  color: $blue;
+
+  &:hover {
+    background-color: $hover-blue;
+  }
+}
