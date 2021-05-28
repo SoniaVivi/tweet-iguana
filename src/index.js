@@ -51,12 +51,11 @@ const tweetsController = (() => {
 
   const _findTweets = (callbacks) => {
     document.querySelectorAll(_roleQuery).forEach((rolesContainer) => {
-      if (!!rolesContainer.querySelector(".download-button")) {
-        return;
+      if (!rolesContainer.querySelector(".download-button")) {
+        _hasAttachments(rolesContainer.parentNode.parentNode)
+          ? _addButton(rolesContainer)
+          : "";
       }
-      _hasAttachments(rolesContainer.parentNode.parentNode)
-        ? _addButton(rolesContainer)
-        : "";
     });
   };
 
@@ -67,14 +66,13 @@ const tweetsController = (() => {
     !!tweet.lastChild.querySelector(_attachmentsQuery) || _hasRestricted(tweet);
 
   const start = () => {
-    if (_checks >= 12) {
-      window.setTimeout(start, 5000);
-    }
     _findTweets();
     _checks += 1;
-    window.setTimeout(start, 100);
+    _checks >= 12
+      ? window.setTimeout(start, 5000)
+      : window.setTimeout(start, 100);
   };
   return { start };
 })();
 
-window.setTimeout(() => tweetsController.start(), 3000);
+window.setTimeout(() => tweetsController.start(), 2000);

@@ -10,20 +10,15 @@ const downloadsController = (() => {
       attachmentData.push({ filename: _getFilename(url), url: url })
     );
     for (const data of attachmentData) {
-      browser.downloads.download({
-        url: data.url,
-        filename: data.filename,
-        conflictAction: "uniquify",
-      });
+      browser.downloads
+        .download({
+          url: data.url,
+          filename: data.filename,
+          conflictAction: "uniquify",
+        })
+        .then((response) => console.log(`Successfully download ${response}`))
+        .catch((e) => console.log(e));
     }
-
-    //For testing
-
-    // try {
-    //   alert("Open the Browser Console.");
-    // } catch (e) {
-    //   console.log("alert() threw an error. Probably Firefox version < 49.");
-    // }
   };
 
   return { watch };
