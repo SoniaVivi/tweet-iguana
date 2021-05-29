@@ -1,22 +1,13 @@
-const helpers = (() => {
-  const createElement = (options = {}) => {
-    const newElement = document.createElement(options.tag);
-    if ("className" in options) {
+export const createElement = (options = {}) => {
+  const newElement = document.createElement(options.tag);
+  for (const [key, val] of Object.entries(options)) {
+    if (key == "tag") {
+      continue;
+    } else if (key == "className") {
       newElement.classList.add(options.className.split(" "));
+      continue;
     }
-    if ("textContent" in options) {
-      newElement.textContent = options.textContent;
-    }
-    if ("href" in options) {
-      newElement.href = options.href;
-    }
-    if ("download" in options) {
-      newElement.download = options.download;
-    }
-    return newElement;
-  };
-
-  return { createElement };
-})();
-
-export default helpers;
+    newElement[key] = val;
+  }
+  return newElement;
+};

@@ -1,5 +1,5 @@
 const downloadsController = (() => {
-  const _downloadPath = "~/Pictures/TweetIguana";
+  const _downloadPath = "tweet-iguana";
 
   const _getFilename = (url) =>
     `${url.match(/([A-Z])\w+/)[0]}.${url.match(/(?<=\=)(.*)(?=\&)/)[0]}`;
@@ -13,7 +13,7 @@ const downloadsController = (() => {
       browser.downloads
         .download({
           url: data.url,
-          filename: data.filename,
+          filename: _downloadPath + "/" + data.filename,
           conflictAction: "uniquify",
         })
         .then((response) => console.log(`Successfully download ${response}`))
@@ -25,3 +25,4 @@ const downloadsController = (() => {
 })();
 
 browser.runtime.onMessage.addListener(downloadsController.watch);
+// "https://video.twimg.com/tweet_video/E1KHxzSXoAALnrh.mp4"

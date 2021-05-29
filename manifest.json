@@ -10,7 +10,7 @@
   },
 
   "background": {
-    "scripts": ["/src/downloadsController.js"]
+    "scripts": ["/dist/downloadManager.js"]
   },
 
   "content_scripts": [
@@ -20,11 +20,24 @@
     }
   ],
 
+  "options_ui": {
+    "page": "dist/config/config.html",
+    "browser_style": false,
+    "chrome_style": false
+  },
+
   "permissions": [
     "webNavigation",
     "*://*.twitter.com/*",
     "*://pbs.twimg.com/*",
     "downloads",
-    "notifications"
-  ]
+    "notifications",
+    "storage"
+  ],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "tweetiguana@example.org"
+    }
+  }
 }

@@ -1,9 +1,8 @@
-import "./style.scss";
-import helpers from "./helpers";
+import "./download-button.scss";
+import { createElement } from "./helpers";
 
 const tweetsController = (() => {
   let _checks = 0;
-  const _createElement = helpers.createElement;
   const _attachmentsQuery = "img[src^='https://pbs.twimg.com/media']";
   const _tweetsQuery = "[data-testid='tweet']";
   const _roleQuery = "[role='group']";
@@ -11,7 +10,7 @@ const tweetsController = (() => {
   const _size = "orig";
 
   const _addButton = (rolesContainer) => {
-    const buttonElem = _createElement({
+    const buttonElem = createElement({
       tag: "button",
       className: "download-button",
       textContent: "Download Attachments",
