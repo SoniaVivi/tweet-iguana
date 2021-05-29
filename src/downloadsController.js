@@ -1,10 +1,33 @@
+import { loadOption, saveOption } from "./storageController";
+
 const downloadsController = (() => {
-  const _downloadPath = "~/Pictures/TweetIguana";
+  let _size = "orig";
+  let _downloadPath = "tweet-iguana";
+  let _restrictedContent = "true";
 
   const _getFilename = (url) =>
     `${url.match(/([A-Z])\w+/)[0]}.${url.match(/(?<=\=)(.*)(?=\&)/)[0]}`;
 
-  const watch = (urls) => {
+  const _watch = (message) => {
+    if (message == 444) {
+      return Promise.allSettled(_loadOptions()).then(_messagePreferences());
+    } else if (message == 333) {
+      return _messagePreferences();
+    }
+    _download(message);
+  };
+
+  const _messagePreferences = () =>
+    browser.tabs.query({}).then((tabs) => {
+      for (const tab of tabs) {
+        return browser.tabs.sendMessage(tab.id, {
+          size: _size,
+          restrictedContent: _restrictedContent,
+        });
+      }
+    });
+
+  const _download = (urls) => {
     const attachmentData = [];
     urls.forEach((url) =>
       attachmentData.push({ filename: _getFilename(url), url: url })
@@ -13,7 +36,7 @@ const downloadsController = (() => {
       browser.downloads
         .download({
           url: data.url,
-          filename: data.filename,
+          filename: _downloadPath + "/" + data.filename,
           conflictAction: "uniquify",
         })
         .then((response) => console.log(`Successfully download ${response}`))
@@ -21,7 +44,21 @@ const downloadsController = (() => {
     }
   };
 
-  return { watch };
+  const _loadOptions = () => [
+    loadOption("size").then((val) => (_size = val)),
+    loadOption("path").then((path) => (_downloadPath = path)),
+    loadOption("restricted-content").then(
+      (val) => (_restrictedContent = val == "true" ? true : false)
+    ),
+  ];
+
+  const start = () => {
+    browser.runtime.onMessage.addListener(_watch);
+    _loadOptions();
+  };
+
+  return { start };
 })();
 
-browser.runtime.onMessage.addListener(downloadsController.watch);
+downloadsController.start();
+// "https://video.twimg.com/tweet_video/E1KHxzSXoAALnrh.mp4"

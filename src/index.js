@@ -1,17 +1,17 @@
-import "./style.scss";
-import helpers from "./helpers";
+import "./download-button.scss";
+import { createElement } from "./helpers";
 
 const tweetsController = (() => {
   let _checks = 0;
-  const _createElement = helpers.createElement;
   const _attachmentsQuery = "img[src^='https://pbs.twimg.com/media']";
   const _tweetsQuery = "[data-testid='tweet']";
   const _roleQuery = "[role='group']";
   const _restrictedContentQuery = "[href='/settings/content_you_see']";
-  const _size = "orig";
+  let _size = "orig";
+  let _downloadRestrictedContent = true;
 
   const _addButton = (rolesContainer) => {
-    const buttonElem = _createElement({
+    const buttonElem = createElement({
       tag: "button",
       className: "download-button",
       textContent: "Download Attachments",
@@ -41,9 +41,11 @@ const tweetsController = (() => {
 
   const _openRestrictedAttachments = (tweet) =>
     new Promise((resolve, reject) => {
-      tweet.querySelectorAll("span").forEach((spanElem) => {
-        spanElem.textContent == "View" ? spanElem.click() : "";
-      });
+      if (_downloadRestrictedContent) {
+        tweet.querySelectorAll("span").forEach((spanElem) => {
+          spanElem.textContent == "View" ? spanElem.click() : "";
+        });
+      }
       window.setTimeout(() => {
         resolve(true);
       }, 50);
@@ -65,13 +67,23 @@ const tweetsController = (() => {
   const _hasAttachments = (tweet) =>
     !!tweet.lastChild.querySelector(_attachmentsQuery) || _hasRestricted(tweet);
 
+  const _watch = () => {
+    browser.runtime.onMessage.addListener((message) => {
+      _size = message.size;
+      _downloadRestrictedContent = message.restrictedContent;
+    });
+  };
+
   const start = () => {
+    !_checks && browser.runtime.sendMessage(333);
+    !_checks && _watch();
     _findTweets();
     _checks += 1;
     _checks >= 12
-      ? window.setTimeout(start, 5000)
+      ? window.setTimeout(start, 3750)
       : window.setTimeout(start, 100);
   };
+
   return { start };
 })();
 

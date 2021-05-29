@@ -1,13 +1,16 @@
 const path = require("path");
 
 module.exports = {
+  devtool: "source-map",
   mode: "development",
   entry: {
     main: "./src/index.js",
+    "config/config": "./src/optionsController",
+    downloadManager: "./src/downloadsController",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "main.js",
+    filename: "[name].js",
   },
   module: {
     rules: [
