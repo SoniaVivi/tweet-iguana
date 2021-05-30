@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Tweet iguana",
-  "version": "1.0",
+  "version": "2.0",
 
   "description": "Adds a button to download attachments from tweets",
 
