@@ -33,11 +33,5 @@
     "downloads",
     "notifications",
     "storage"
-  ],
-
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "tweetiguana@example.org"
-    }
-  }
+  ]
 }
