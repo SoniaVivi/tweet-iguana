@@ -5,15 +5,16 @@ $hover-blue: #dae9f2;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  width: 95px;
-  height: 32px;
+  width: 90px;
+  height: 30px;
+  margin: auto 0;
 
   outline: unset;
   border: 1px solid $blue;
-  border-radius: 28px;
+  border-radius: 27px;
 
   font-weight: 600;
-  font-size: 12px;
+  font-size: 11px;
 
   background-color: unset;
   color: $blue;

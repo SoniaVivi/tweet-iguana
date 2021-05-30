@@ -1,0 +1,69 @@
+$border: 1px solid #d3d3d3;
+
+@font-face {
+  font-family: "Nimbus Sans";
+  src: url("./fonts/NimbusSanL-Bol.otf") format("opentype");
+}
+
+* {
+  list-style: none;
+  font-family: "Nimbus Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.heading {
+  font-weight: 600;
+}
+
+ul.options {
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 350px;
+  margin: 0 auto;
+
+  > li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-bottom: $border;
+  }
+
+  > li:last-child {
+    border-bottom: unset;
+  }
+}
+
+.size {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+div.size {
+  justify-content: space-between;
+  width: 100%;
+}
+
+ul.size {
+  flex-flow: column nowrap;
+}
+
+li.size {
+  justify-content: space-between;
+}
+
+li.path {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+input.download-path {
+  flex-basis: 90px;
+  max-width: 150px;
+  height: 25px;
+  padding: 0 5px;
+  margin-left: 15px;
+  border: $border;
+  border-radius: 5px;
+}

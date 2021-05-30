@@ -27,11 +27,9 @@
   },
 
   "permissions": [
-    "webNavigation",
     "*://*.twitter.com/*",
     "*://pbs.twimg.com/*",
     "downloads",
-    "notifications",
     "storage"
   ]
 }
