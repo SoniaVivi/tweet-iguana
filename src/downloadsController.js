@@ -6,7 +6,9 @@ const downloadsController = (() => {
   let _restrictedContent = "true";
 
   const _getFilename = (url) =>
-    `${url.match(/([A-Z])\w+/)[0]}.${url.match(/(?<=\=)(.*)(?=\&)/)[0]}`;
+    url.match(/video/) == null
+      ? `${url.match(/([A-Z])\w+/)[0]}.${url.match(/(?<=\=)(.*)(?=\&)/)[0]}`
+      : url.match(/([A-Z])\w+.+/)[0];
 
   const _watch = (message) => {
     if (message == 444) {
@@ -38,6 +40,7 @@ const downloadsController = (() => {
           url: data.url,
           filename: _downloadPath + "/" + data.filename,
           conflictAction: "uniquify",
+          saveAs: false,
         })
         .then((response) => console.log(`Successfully download ${response}`))
         .catch((e) => console.log(e));
@@ -61,4 +64,3 @@ const downloadsController = (() => {
 })();
 
 downloadsController.start();
-// "https://video.twimg.com/tweet_video/E1KHxzSXoAALnrh.mp4"

@@ -15,7 +15,11 @@
 
   "content_scripts": [
     {
-      "matches": ["*://*.twitter.com/*", "*://pbs.twimg.com/*"],
+      "matches": [
+        "*://*.twitter.com/*",
+        "*://pbs.twimg.com/*",
+        "*://video.twimg.com/*"
+      ],
       "js": ["/dist/main.js"]
     }
   ],
@@ -29,6 +33,7 @@
   "permissions": [
     "*://*.twitter.com/*",
     "*://pbs.twimg.com/*",
+    "*://video.twimg.com/*",
     "downloads",
     "storage"
   ]

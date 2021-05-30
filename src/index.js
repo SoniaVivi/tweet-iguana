@@ -3,13 +3,13 @@ import { createElement } from "./helpers";
 
 const tweetsController = (() => {
   let _checks = 0;
-  const _attachmentsQuery = "img[src^='https://pbs.twimg.com/media']";
+  const _attachmentsQuery =
+    "img[src^='https://pbs.twimg.com/media'], video[src^='https://video.twimg.com/tweet_video']";
   const _tweetsQuery = "[data-testid='tweet']";
   const _roleQuery = "[role='group']";
   const _restrictedContentQuery = "[href='/settings/content_you_see']";
   let _size = "orig";
   let _downloadRestrictedContent = true;
-
   const _addButton = (rolesContainer) => {
     const buttonElem = createElement({
       tag: "button",
@@ -36,7 +36,9 @@ const tweetsController = (() => {
 
   const _getLink = (attachment) => {
     let link = attachment.currentSrc;
-    return `${link.slice(0, link.indexOf("&name="))}&name=${_size}`;
+    return link.match(/video/) == null
+      ? `${link.slice(0, link.indexOf("&name="))}&name=${_size}`
+      : link;
   };
 
   const _openRestrictedAttachments = (tweet) =>
