@@ -1,8 +1,10 @@
 # Tweet iguana
 
-Tweet iguana is a browser extension that adds a button to tweets to download all linked attachments.
+Tweet iguana is a browser extension that adds a button to tweets to download linked attachments.
 
-Supports downloading image and video attachments.
+Supports downloading image and GIFT attachments.
+
+**Does not** support Video Attachments
 
 # Compiling
 
